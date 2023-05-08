@@ -22,16 +22,16 @@ public class KeyBoardInputs implements KeyListener {
         switch(e.getKeyCode())
         {
             case KeyEvent.VK_W:
-                System.out.println("w");
+                gamePanel.changeY(-5);
                 break;
             case KeyEvent.VK_A:
-                System.out.println("a");
+                gamePanel.changeX(-5);
                 break;
             case KeyEvent.VK_S:
-                System.out.println("s");
+                gamePanel.changeY(5);
                 break;
             case KeyEvent.VK_D:
-                System.out.println("d");
+                gamePanel.changeX(5);
                 break;
         }
     }
