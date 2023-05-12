@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 
 
@@ -18,6 +19,7 @@ public class GamePanel extends JPanel {
     private float xDelta = 100;
     private float yDelta = 100;
     private BufferedImage img;
+
     public GamePanel()
     {
         mouseInputs = new MouseInputs(this);
@@ -30,7 +32,11 @@ public class GamePanel extends JPanel {
     private void importImg()
     {
         InputStream is = getClass().getResourceAsStream("/download.png");
-        img = ImageIO.read(is);
+        try {
+            img = ImageIO.read(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -61,7 +67,7 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        //g.drawImage(null, x, y, null);
+        g.drawImage(img, 0, 0, null);
     }
 
 
