@@ -19,19 +19,31 @@ public class GamePanel extends JPanel {
     private float xDelta = 100;
     private float yDelta = 100;
     private BufferedImage img;
+    private BufferedImage[] idleAnimation;
 
     public GamePanel()
     {
         mouseInputs = new MouseInputs(this);
+        importImg();
+        loadAnimations();
         setPanelSize();
         addKeyListener(new KeyBoardInputs(this));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
     }
 
+    private void loadAnimations()
+    {
+        idleAnimation = new BufferedImage[3];
+        for (int i = 0; i < idleAnimation.length; i++)
+        {
+            idleAnimation[i] = img.getSubimage(i * 200, 0, 200, 225);
+        }
+    }
+
     private void importImg()
     {
-        InputStream is = getClass().getResourceAsStream("/download.png");
+        InputStream is = getClass().getResourceAsStream("/kindpng_375960.png");
         try {
             img = ImageIO.read(is);
         } catch (IOException e) {
@@ -67,7 +79,7 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(idleAnimation[0], (int)xDelta, (int)yDelta, 102, 112, null);
     }
 
 
