@@ -20,11 +20,16 @@ public class GamePanel extends JPanel {
     private float yDelta = 100;
     private BufferedImage img;
     private BufferedImage[] idleAnimation;
+    private int aniTick;
+    private int aniIndex;
+    private int aniSpeed;
 
     public GamePanel()
     {
+        aniSpeed = 25;
         mouseInputs = new MouseInputs(this);
         importImg();
+        loadAnimations();
         loadAnimations();
         setPanelSize();
         addKeyListener(new KeyBoardInputs(this));
@@ -34,16 +39,16 @@ public class GamePanel extends JPanel {
 
     private void loadAnimations()
     {
-        idleAnimation = new BufferedImage[3];
+        idleAnimation = new BufferedImage[4];
         for (int i = 0; i < idleAnimation.length; i++)
         {
-            idleAnimation[i] = img.getSubimage(i * 200, 0, 200, 225);
+            idleAnimation[i] = img.getSubimage(i * 47, 0, 47, 60);
         }
     }
 
     private void importImg()
     {
-        InputStream is = getClass().getResourceAsStream("/kindpng_375960.png");
+        InputStream is = getClass().getResourceAsStream("/Monkey D Luffy.png");
         try {
             img = ImageIO.read(is);
         } catch (IOException e) {
@@ -76,10 +81,25 @@ public class GamePanel extends JPanel {
         this.yDelta = y;
     }
 
+    private void updateAnimationTick()
+    {
+        aniTick++;
+        if (aniTick >= aniSpeed)
+        {
+            aniTick = 0;
+            aniIndex++;
+            if (aniIndex >= idleAnimation.length)
+            {
+                aniIndex = 0;
+            }
+        }
+    }
+
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        g.drawImage(idleAnimation[0], (int)xDelta, (int)yDelta, 102, 112, null);
+        updateAnimationTick();
+        g.drawImage(idleAnimation[aniIndex], (int)xDelta, (int)yDelta, 70, 90, null);
     }
 
 
