@@ -20,16 +20,19 @@ public class GamePanel extends JPanel {
     private float yDelta = 100;
     private BufferedImage img;
     private BufferedImage[] idleAnimation;
+    private BufferedImage[] runningAnimation;
     private int aniTick;
     private int aniIndex;
+    private int runIndex;
     private int aniSpeed;
+    private boolean isRunning;
 
     public GamePanel()
     {
         aniSpeed = 25;
+        runIndex = 5;
         mouseInputs = new MouseInputs(this);
         importImg();
-        loadAnimations();
         loadAnimations();
         setPanelSize();
         addKeyListener(new KeyBoardInputs(this));
@@ -42,7 +45,14 @@ public class GamePanel extends JPanel {
         idleAnimation = new BufferedImage[4];
         for (int i = 0; i < idleAnimation.length; i++)
         {
-            idleAnimation[i] = img.getSubimage(i * 47, 0, 47, 60);
+            idleAnimation[i] = img.getSubimage(i * 48, 0, 48, 60);
+        }
+
+        runningAnimation = new BufferedImage[11];
+        for(int i = 5; i < runningAnimation.length; i++)
+        {
+            runningAnimation[i] = img.getSubimage(i * 47, 0, 47, 60);
+            isRunning = true;
         }
     }
 
@@ -83,23 +93,37 @@ public class GamePanel extends JPanel {
 
     private void updateAnimationTick()
     {
-        aniTick++;
-        if (aniTick >= aniSpeed)
+        if (isRunning)
         {
-            aniTick = 0;
-            aniIndex++;
-            if (aniIndex >= idleAnimation.length)
+            aniTick++;
+            if (aniTick >= aniSpeed)
             {
-                aniIndex = 0;
+                aniTick = 0;
+                runIndex++;
+                if (runIndex >= runningAnimation.length)
+                {
+                    runIndex = 5;
+                }
             }
         }
+        else {
+            aniTick++;
+            if (aniTick >= aniSpeed) {
+                aniTick = 0;
+                aniIndex++;
+                if (aniIndex >= idleAnimation.length) {
+                    aniIndex = 0;
+                }
+            }
+        }
+
     }
 
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
         updateAnimationTick();
-        g.drawImage(idleAnimation[aniIndex], (int)xDelta, (int)yDelta, 70, 90, null);
+        g.drawImage(runningAnimation[runIndex], (int)xDelta, (int)yDelta, 70, 90, null);
     }
 
 
