@@ -1,10 +1,10 @@
 package Inputs;
 
 import Main.GamePanel;
-
+import Main.Game;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+import static utils.Constants.Directions.*;
 
 public class KeyBoardInputs implements KeyListener {
     private GamePanel gamePanel;
@@ -22,22 +22,30 @@ public class KeyBoardInputs implements KeyListener {
         switch(e.getKeyCode())
         {
             case KeyEvent.VK_W:
-                gamePanel.changeY(-5);
+                gamePanel.setDirection(UP);
                 break;
             case KeyEvent.VK_A:
-                gamePanel.changeX(-5);
+                gamePanel.setDirection(LEFT);
                 break;
             case KeyEvent.VK_S:
-                gamePanel.changeY(5);
+                gamePanel.setDirection(DOWN);
                 break;
             case KeyEvent.VK_D:
-                gamePanel.changeX(5);
+                gamePanel.setDirection(RIGHT);
+                gamePanel.setMoving(false);
                 break;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        switch(e.getKeyCode())
+        {
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_D:
+                break;
+        }
     }
 }
