@@ -96,12 +96,13 @@ public class Player extends Entity{
         }
 
 
-        public void updateGame()
-        {
-            updateAnimationTick();
-            setAnimation();
-            updatePosition();
-        }
+    }
+
+    public void updateGame()
+    {
+        updateAnimationTick();
+        setAnimation();
+        updatePosition();
     }
 
     private void updatePosition()
