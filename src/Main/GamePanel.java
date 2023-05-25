@@ -27,7 +27,7 @@ public class GamePanel extends JPanel {
     private int aniSpeed;
     private int playerAction = IDLE;
     private int playerDirection = -1;
-    private boolean moving = true;
+    private boolean moving;
 
     public GamePanel()
     {
@@ -88,20 +88,20 @@ public class GamePanel extends JPanel {
     {
         if (playerAction == RUNNING)
         {
-            aniSpeed = 12;
+            aniSpeed = 20;
             aniTick++;
             if (aniTick >= aniSpeed)
             {
                 aniTick = 0;
                 runIndex++;
-                if (runIndex >= getSpriteAmount(aniIndex))
+                if (runIndex >= runningAnimation.length)
                 {
                     runIndex = 5;
                 }
             }
         }
         else {
-            aniSpeed = 20;
+            aniSpeed = 40;
             aniTick++;
             if (aniTick >= aniSpeed) {
                 aniTick = 0;
@@ -131,22 +131,29 @@ public class GamePanel extends JPanel {
             {
                 case LEFT:
                     xDelta -= 5;
+                    break;
                 case UP:
                     yDelta -= 5;
+                    break;
                 case RIGHT:
                     xDelta += 5;
+                    break;
                 case DOWN:
                     yDelta += 5;
                     break;
             }
         }
     }
-    public void paintComponent(Graphics g)
+
+    public void updateGame()
     {
-        super.paintComponent(g);
         updateAnimationTick();
         setAnimation();
         updatePosition();
+    }
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
         if (playerAction == IDLE)
         {
             g.drawImage(idleAnimation[aniIndex], (int)xDelta, (int)yDelta, 72, 90, null);
