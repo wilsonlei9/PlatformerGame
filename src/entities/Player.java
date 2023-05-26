@@ -8,19 +8,24 @@ import java.io.InputStream;
 
 import static utils.Constants.Directions.*;
 import static utils.Constants.Directions.DOWN;
-import static utils.Constants.PlayerConstants.IDLE;
-import static utils.Constants.PlayerConstants.RUNNING;
+import static utils.Constants.PlayerConstants.*;
 
 public class Player extends Entity{
     private BufferedImage[] idleAnimation;
     private BufferedImage[] runningAnimation;
+    private BufferedImage[] pistolAnimation;
     private int aniTick;
     private int aniIndex;
     private int runIndex;
     private int aniSpeed;
     private int playerAction = IDLE;
-    private int playerDirection = -1;
     private boolean moving;
+    private boolean attacking;
+    private boolean left;
+    private boolean up;
+    private boolean right;
+    private boolean down;
+    private float playerSpeed = 2.0f;
 
     public Player(float x, float y)
     {
@@ -30,9 +35,9 @@ public class Player extends Entity{
 
     public void update()
     {
+        updatePosition();
         updateAnimationTick();
         setAnimation();
-        updatePosition();
     }
 
     public void render(Graphics g)
@@ -45,16 +50,6 @@ public class Player extends Entity{
         {
             g.drawImage(runningAnimation[runIndex], (int)x, (int)y, 70, 90, null);
         }
-    }
-
-    public void setDirection(int direction)
-    {
-        this.playerDirection = direction;
-    }
-
-    public void setMoving(boolean moving)
-    {
-        this.moving = moving;
     }
 
     private void updateAnimationTick()
@@ -81,6 +76,7 @@ public class Player extends Entity{
                 aniIndex++;
                 if (aniIndex >= idleAnimation.length) {
                     aniIndex = 0;
+                    attacking = false;
                 }
             }
         }
@@ -90,6 +86,10 @@ public class Player extends Entity{
     {
         if (moving) {
             playerAction = RUNNING;
+        }
+        else if (attacking)
+        {
+
         }
         else {
             playerAction = IDLE;
@@ -107,23 +107,27 @@ public class Player extends Entity{
 
     private void updatePosition()
     {
-        if (moving)
+        moving = false;
+        if (left && !right)
         {
-            switch(playerDirection)
-            {
-                case LEFT:
-                    x -= 5;
-                    break;
-                case UP:
-                    y -= 5;
-                    break;
-                case RIGHT:
-                    x += 5;
-                    break;
-                case DOWN:
-                    y += 5;
-                    break;
-            }
+            x -= playerSpeed;
+            moving = true;
+        }
+        else if (right && !left)
+        {
+            x += playerSpeed;
+            moving = true;
+        }
+
+        if (up && !down)
+        {
+            y -= playerSpeed;
+            moving = true;
+        }
+        else if (down && !up)
+        {
+            y += playerSpeed;
+            moving = true;
         }
     }
 
@@ -145,11 +149,67 @@ public class Player extends Entity{
                 runningAnimation[i] = img.getSubimage(i * 47, 0, 47, 60);
 
             }
+
+            pistolAnimation = new BufferedImage[21];
+            for (int i = 0; i < pistolAnimation.length; i++)
+            {
+                if (i < 14)
+                {
+                    pistolAnimation[i] = img.getSubimage(i * 48, 22, 48, 60);
+                }
+                if (i >= 14)
+                {
+
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void resetDirectionBooleans()
+    {
+        left = false;
+        up = false;
+        right = false;
+        down = false;
+    }
 
+    public void setAttack(boolean attacking)
+    {
+        this.attacking = attacking;
+    }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public void setLeft(boolean left) {
+        this.left = left;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
+    }
+
+    public void setRight(boolean right) {
+        this.right = right;
+    }
+
+    public void setDown(boolean down) {
+        this.down = down;
     }
 }
 
