@@ -50,6 +50,101 @@ public class Player extends Entity{
         {
             g.drawImage(runningAnimation[runIndex], (int)x, (int)y, 70, 90, null);
         }
+        else if (playerAction == ATTACK_1)
+        {
+            if (aniIndex == 0)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 51, 90, null);
+            }
+            if (aniIndex == 1)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 51, 90, null);
+            }
+            if (aniIndex == 2)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 52, 90, null);
+            }
+            if (aniIndex == 3)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 39, 90, null);
+            }
+            if (aniIndex == 4)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+            }
+            if (aniIndex == 5)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 45, 90, null);
+            }
+            if (aniIndex == 6)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 45, 90, null);
+            }
+            if (aniIndex == 7)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+            }
+            if (aniIndex == 8)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+            }
+            if (aniIndex == 9)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 45, 90, null);
+            }
+            if (aniIndex == 10)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 58, 90, null);
+            }
+            if (aniIndex == 11)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 63, 90, null);
+            }
+            if (aniIndex == 12)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 61, 90, null);
+            }
+            if (aniIndex == 13)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 66, 90, null);
+            }
+            if (aniIndex == 14)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 90, 90, null);
+            }
+            if (aniIndex == 15)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 96, 90, null);
+            }
+            if (aniIndex == 16)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 106, 90, null);
+            }
+            if (aniIndex == 17)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 130, 90, null);
+            }
+            if (aniIndex == 18)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 144, 90, null);
+            }
+            if (aniIndex == 19)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 168, 90, null);
+            }
+            if (aniIndex == 20)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 178, 90, null);
+            }
+            if (aniIndex == 21)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+            }
+            if (aniIndex == 22)
+            {
+                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+            }
+        }
     }
 
     private void updateAnimationTick()
@@ -68,13 +163,29 @@ public class Player extends Entity{
                 }
             }
         }
-        else {
+        else if (playerAction == IDLE)
+        {
             aniSpeed = 40;
             aniTick++;
             if (aniTick >= aniSpeed) {
                 aniTick = 0;
                 aniIndex++;
                 if (aniIndex >= idleAnimation.length) {
+                    aniIndex = 0;
+                    attacking = false;
+                }
+            }
+        }
+        else if (playerAction == ATTACK_1)
+        {
+            aniSpeed = 12;
+            aniTick++;
+            if (aniTick >= aniSpeed)
+            {
+                aniTick = 0;
+                aniIndex++;
+                if (aniIndex >= pistolAnimation.length)
+                {
                     aniIndex = 0;
                     attacking = false;
                 }
@@ -89,13 +200,11 @@ public class Player extends Entity{
         }
         else if (attacking)
         {
-
+            playerAction = ATTACK_1;
         }
         else {
             playerAction = IDLE;
         }
-
-
     }
 
     public void updateGame()
@@ -133,6 +242,8 @@ public class Player extends Entity{
 
     private void loadAnimations()
     {
+        int n = 2032;
+        int m = 2091;
         InputStream is = getClass().getResourceAsStream("/Monkey D Luffy.png");
         try {
             BufferedImage img = ImageIO.read(is);
@@ -150,16 +261,99 @@ public class Player extends Entity{
 
             }
 
-            pistolAnimation = new BufferedImage[21];
-            for (int i = 0; i < pistolAnimation.length; i++)
-            {
-                if (i < 14)
+            pistolAnimation = new BufferedImage[22];
+            for (int i = 0; i < pistolAnimation.length; i++) {
+                if (i == 0)
                 {
-                    pistolAnimation[i] = img.getSubimage(i * 48, 22, 48, 60);
+                    pistolAnimation[i] = img.getSubimage(8, n, 34, 60);
                 }
-                if (i >= 14)
+                if (i == 1)
                 {
-
+                    pistolAnimation[i] = img.getSubimage(57, n, 34, 60);
+                }
+                if (i == 2)
+                {
+                    pistolAnimation[i] = img.getSubimage(109, n, 35, 60);
+                }
+                if (i == 3)
+                {
+                    pistolAnimation[i] = img.getSubimage(157, n, 26, 60);
+                }
+                if (i == 4)
+                {
+                    pistolAnimation[i] = img.getSubimage(198, n, 32, 60);
+                }
+                if (i == 5)
+                {
+                    pistolAnimation[i] = img.getSubimage(239, n, 30, 60);
+                }
+                if (i == 6)
+                {
+                    pistolAnimation[i] = img.getSubimage(239, n, 30, 60);
+                }
+                if (i == 7)
+                {
+                    pistolAnimation[i] = img.getSubimage(343, n, 32, 60);
+                }
+                if (i == 8)
+                {
+                    pistolAnimation[i] = img.getSubimage(390, n, 32, 60);
+                }
+                if (i == 9)
+                {
+                    pistolAnimation[i] = img.getSubimage(431, n, 30, 60);
+                }
+                if (i == 10)
+                {
+                    pistolAnimation[i] = img.getSubimage(477, n, 39, 60);
+                }
+                if (i == 11)
+                {
+                    pistolAnimation[i] = img.getSubimage(528, n, 42, 60);
+                }
+                if (i == 12)
+                {
+                    pistolAnimation[i] = img.getSubimage(579, n, 41, 60);
+                }
+                if (i == 13)
+                {
+                    pistolAnimation[i] = img.getSubimage(640, n, 44, 60);
+                }
+                if (i == 14)
+                {
+                    pistolAnimation[i] = img.getSubimage(690, n, 60, 60);
+                }
+                if (i == 15)
+                {
+                    pistolAnimation[i] = img.getSubimage(754, n, 64, 60);
+                }
+                if (i == 16)
+                {
+                    pistolAnimation[i] = img.getSubimage(830, n, 71, 60);
+                }
+                if (i == 17)
+                {
+                    pistolAnimation[i] = img.getSubimage(23, m, 87, 60);
+                }
+                if (i == 18)
+                {
+                    pistolAnimation[i] = img.getSubimage(121, m, 96, 60);
+                }
+                if (i == 19)
+                {
+                    pistolAnimation[i] = img.getSubimage(225, m, 112, 60);
+                }
+                if (i == 20)
+                {
+                    pistolAnimation[i] = img.getSubimage(345, m, 119, 60);
+                }
+                if (i == 21)
+                {
+                    pistolAnimation[i] = img.getSubimage(474, m, 32, 60);
+                }
+                if (i == 22)
+                {
+                    pistolAnimation[i] = img.getSubimage(519, m, 32, 60);
                 }
             }
         } catch (IOException e) {
