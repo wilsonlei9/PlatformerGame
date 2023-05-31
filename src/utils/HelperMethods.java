@@ -65,10 +65,23 @@ public class HelperMethods {
         {
             int tileYPos = currentTile * Game.TILES_SIZE;
             int yOffset = (int)(Game.TILES_SIZE - hitbox.height);
-            return tileYPos + yOffset - 1; //hitbox of the player on the floor
+            return tileYPos + yOffset + 62; //hitbox of the player on the floor
         }
         else { // jumping
             return currentTile * Game.TILES_SIZE; // hitbox of the player hitting the roof
         }
+    }
+
+    public static boolean isEntityOnFloor(Rectangle2D.Float hitbox, int[][] lvlData)
+    {
+        // check the pixel below bottom left and bottom right of hitbox
+        if (!isSolid(hitbox.x, hitbox.y + hitbox.height + 1, lvlData))
+        {
+            if (!isSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height + 1, lvlData))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

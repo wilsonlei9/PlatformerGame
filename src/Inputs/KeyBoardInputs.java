@@ -13,6 +13,7 @@ public class KeyBoardInputs implements KeyListener {
     public KeyBoardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
+    public boolean upPressed,downPressed;
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -23,7 +24,8 @@ public class KeyBoardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gamePanel.getGame().getPlayer().setUp(true);
+                upPressed = true;
+                //gamePanel.getGame().getPlayer().setUp(true);
                 System.out.println("w");
                 break;
             case KeyEvent.VK_A:
@@ -35,6 +37,8 @@ public class KeyBoardInputs implements KeyListener {
             case KeyEvent.VK_D:
                 gamePanel.getGame().getPlayer().setRight(true);
                 break;
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(true);
         }
     }
 
@@ -43,7 +47,8 @@ public class KeyBoardInputs implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gamePanel.getGame().getPlayer().setUp(false);
+                upPressed = false;
+                //gamePanel.getGame().getPlayer().setUp(false);
                 break;
             case KeyEvent.VK_A:
                 gamePanel.getGame().getPlayer().setLeft(false);
@@ -54,6 +59,8 @@ public class KeyBoardInputs implements KeyListener {
             case KeyEvent.VK_D:
                 gamePanel.getGame().getPlayer().setRight(false);
                 break;
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(false);
         }
     }
 }

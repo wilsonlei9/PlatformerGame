@@ -18,10 +18,10 @@ public class Player extends Entity{
     private BufferedImage[] idleAnimation;
     private BufferedImage[] runningAnimation;
     private BufferedImage[] pistolAnimation;
-    private int aniTick;
-    private int aniIndex;
-    private int runIndex;
-    private int aniSpeed;
+    private int aniTick; // animation tick
+    private int aniIndex; // animation index
+    private int runIndex; // separate index for running animation, because sprite sheet was designed weird
+    private int aniSpeed; // how fast the animation is
     private int playerAction = IDLE;
     private boolean moving;
     private boolean attacking;
@@ -255,7 +255,13 @@ public class Player extends Entity{
         {
             xSpeed += playerSpeed;
         }
-
+        if (!inAir) // checks if sprite is on the floor
+        {
+            if (!isEntityOnFloor(hitbox, lvlData))
+            {
+                inAir = true; // if not on the floor, sprite is in the air
+            }
+        }
         if (inAir)
         {
             if (canMove(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData))
@@ -284,6 +290,12 @@ public class Player extends Entity{
 
     private void jump()
     {
+        if (inAir)
+        {
+            return;
+        }
+        inAir = true;
+        airSpeed = jumpSpeed;
 
     }
 
@@ -423,6 +435,10 @@ public class Player extends Entity{
     public void loadLvlData(int[][] lvlData)
     {
         this.lvlData = lvlData;
+        if (isEntityOnFloor(hitbox, lvlData))
+        {
+            inAir = true;
+        }
 
     }
 
@@ -470,6 +486,11 @@ public class Player extends Entity{
 
     public void setDown(boolean down) {
         this.down = down;
+    }
+
+    public void setJump(boolean jump)
+    {
+        this.jump = jump;
     }
 }
 
