@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class LevelManager {
-    private Game game;
+    protected Game game;
     private BufferedImage[] levelSprite;
     private Levels levelOne;
 
@@ -33,7 +33,7 @@ public class LevelManager {
         }
     }
 
-    public void draw (Graphics g)
+    public void draw (Graphics g, int lvlOffset)
     {
 
         for (int i = 0; i < Game.TILES_IN_HEIGHT; i++)
@@ -41,7 +41,7 @@ public class LevelManager {
             for (int j = 0; j < Game.TILES_IN_WIDTH; j++)
             {
                 int index = levelOne.getSpriteIndex(j, i);
-                g.drawImage(levelSprite[index], Game.TILES_SIZE * j, Game.TILES_SIZE * i, Game.TILES_SIZE, Game.TILES_SIZE, null);
+                g.drawImage(levelSprite[index], Game.TILES_SIZE * j - lvlOffset, Game.TILES_SIZE * i, Game.TILES_SIZE, Game.TILES_SIZE, null);
             }
         }
     }

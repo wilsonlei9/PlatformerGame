@@ -25,8 +25,7 @@ public class KeyBoardInputs implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
                 upPressed = true;
-                //gamePanel.getGame().getPlayer().setUp(true);
-                System.out.println("w");
+                gamePanel.getGame().getPlayer().setUp(true);
                 break;
             case KeyEvent.VK_A:
                 gamePanel.getGame().getPlayer().setLeft(true);

@@ -55,11 +55,11 @@ public class Player extends Entity{
         setAnimation();
     }
 
-    public void render(Graphics g)
+    public void render(Graphics g, int lvlOffset)
     {
         if (playerAction == IDLE)
         {
-            g.drawImage(idleAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 72, 90, null);
+            g.drawImage(idleAnimation[aniIndex], (int)(hitbox.x - xDrawOffset) - lvlOffset, (int)(hitbox.y - yDrawOffset), 72, 90, null);
             drawHitbox(g);
         }
 
@@ -71,98 +71,128 @@ public class Player extends Entity{
 
         else if (playerAction == ATTACK_1)
         {
-            drawHitbox(g);
             if (aniIndex == 0)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 51, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 51, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 1)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 51, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 51, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 2)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 52, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 52, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 3)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 39, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 39, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 4)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 48, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 5)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 45, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 45, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 6)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 45, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 45, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 7)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 48, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 8)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 48, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 9)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 45, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 45, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 10)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 58, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 58, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 11)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 63, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 63, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 12)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 61, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 61, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 13)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 66, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 66, 90, null);
+                drawHitbox(g);
             }
             if (aniIndex == 14)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 90, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 90, 90, null);
+                hitbox.width = 90;
+                drawHitbox(g);
             }
             if (aniIndex == 15)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 96, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 96, 90, null);
+                hitbox.width = 96;
+                drawHitbox(g);
             }
             if (aniIndex == 16)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 106, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 106, 90, null);
+                hitbox.width = 106;
+                drawHitbox(g);
             }
             if (aniIndex == 17)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 130, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 130, 90, null);
+                hitbox.width = 130;
+                drawHitbox(g);
             }
             if (aniIndex == 18)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 144, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 144, 90, null);
+                hitbox.width = 144;
+                drawHitbox(g);
             }
             if (aniIndex == 19)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 168, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 168, 90, null);
+                hitbox.width = 19;
+                drawHitbox(g);
             }
             if (aniIndex == 20)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 178, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 178, 90, null);
+                hitbox.width = 158;
+                drawHitbox(g);
             }
             if (aniIndex == 21)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 48, 90, null);
+                hitbox.width = 48;
+                drawHitbox(g);
             }
             if (aniIndex == 22)
             {
-                g.drawImage(pistolAnimation[aniIndex], (int)x, (int)y, 48, 90, null);
+                g.drawImage(pistolAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 48, 90, null);
+                drawHitbox(g);
             }
         }
     }
