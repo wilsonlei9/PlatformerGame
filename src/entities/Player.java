@@ -55,11 +55,11 @@ public class Player extends Entity{
         setAnimation();
     }
 
-    public void render(Graphics g, int lvlOffset)
+    public void render(Graphics g)
     {
         if (playerAction == IDLE)
         {
-            g.drawImage(idleAnimation[aniIndex], (int)(hitbox.x - xDrawOffset) - lvlOffset, (int)(hitbox.y - yDrawOffset), 72, 90, null);
+            g.drawImage(idleAnimation[aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), 72, 90, null);
             drawHitbox(g);
         }
 
