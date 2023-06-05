@@ -1,8 +1,44 @@
 package utils;
 
 
+import Main.Game;
+
 public class Constants {
 
+    public static class EnemyConstants
+    {
+        public static final int PIRATE = 0;
+        public static final int IDLE = 0;
+        public static final int RUNNING = 1;
+        public static final int ATTACK = 2;
+        public static final int DEAD = 4;
+
+        public static final int PIRATE_WIDTH_DEFAULT = 40;
+        public static final int PIRATE_HEIGHT_DEFAULT = 46;
+        public static final int PIRATE_WIDTH = (int) (PIRATE_WIDTH_DEFAULT * Game.enemyScale);
+        public static final int PIRATE_HEIGHT = (int) (PIRATE_HEIGHT_DEFAULT * Game.enemyScale);
+        public static final int PIRATE_DRAWOFFSET_X = (int) (20 * Game.scale);
+        public static final int PIRATE_DRAWOFFSET_Y = (int) (37 * Game.scale);
+
+        public static int getSpriteAmount(int enemyType, int enemyState)
+        {
+            switch(enemyType)
+            {
+                case PIRATE:
+                    switch(enemyState)
+                    {
+                        case IDLE:
+                        case ATTACK:
+                        case DEAD:
+                            return 3;
+                        case RUNNING:
+                            return 6;
+                    }
+            }
+            return 0;
+        }
+
+    }
     public static class Directions
     {
         public static final int LEFT = 0;
@@ -21,29 +57,6 @@ public class Constants {
         public static final int ATTACK_2 = 6;
         public static final int ATTACK_3 = 7;
 
-        public static int getSpriteAmount(int playerAction)
-        {
-            switch(playerAction)
-            {
-                case RUNNING:
-                case JUMP:
-                    return 6;
-                case IDLE:
-                    return 4;
-                case FALLING:
-                    return 5;
-                case GROUND:
-                    return 1;
-                case ATTACK_1:
-                    return 21;
-                case ATTACK_2:
-                case ATTACK_3:
-                    return 11;
-                default:
-                    return 1;
-            }
-
-        }
     }
 
 }

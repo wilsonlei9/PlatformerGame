@@ -1,7 +1,10 @@
 package Main;
 
-import entities.Player;
-import levels.LevelManager;
+
+import gamestates.Gamestate;
+import gamestates.Playing;
+import gamestates.Menu;
+
 
 import java.awt.*;
 
@@ -11,11 +14,13 @@ public class Game implements Runnable{
     private Thread gameLoop;
     private final int FPS_SET = 120;
     private final int UPS_SET = 200;
-    private Player player;
-    private LevelManager levelManager;
+
+    private Playing playing;
+    private Menu menu;
 
     public final static int TILES_DEFAULT_SIZE = 32;
     public final static float scale = 2f;
+    public final static float enemyScale = 1.6f;
     public final static int TILES_IN_WIDTH = 26; // how many tiles there are going horizontally
     public final static int TILES_IN_HEIGHT = 14; // how many tiles there are going vertically
     public final static int TILES_SIZE = (int)(TILES_DEFAULT_SIZE * scale);
@@ -32,9 +37,8 @@ public class Game implements Runnable{
 
     private void initializeClasses()
     {
-        levelManager = new LevelManager(this);
-        player = new Player(200, 200, 70, 90);
-        player.loadLvlData(levelManager.getLevel().getLvlData());
+        menu = new Menu(this);
+        playing = new Playing(this);
     }
 
     public void startGameLoop()
@@ -45,14 +49,32 @@ public class Game implements Runnable{
 
     public void update()
     {
-        player.update();
-        levelManager.update();
+        switch(Gamestate.state)
+        {
+            case MENU:
+                menu.update();
+                break;
+            case PLAYING:
+                playing.update();
+                break;
+            default:
+                break;
+        }
     }
 
     public void render(Graphics g)
     {
-        levelManager.draw(g);
-        player.render(g);
+        switch(Gamestate.state)
+        {
+            case MENU:
+                menu.draw(g);
+                break;
+            case PLAYING:
+                playing.draw(g);
+                break;
+            default:
+                break;
+        }
     }
     @Override
     public void run() {
@@ -98,12 +120,19 @@ public class Game implements Runnable{
 
     public void windowFocusLost()
     {
-        player.resetDirectionBooleans();
+        if (Gamestate.state == Gamestate.PLAYING)
+        {
+            playing.getPlayer().resetDirectionBooleans();
+        }
     }
-    public Player getPlayer()
+
+    public Menu getMenu()
     {
-        return player;
+        return menu;
     }
 
-
+    public Playing getPlaying()
+    {
+        return playing;
+    }
 }
