@@ -11,6 +11,7 @@ public class Constants {
         public static final int IDLE = 0;
         public static final int RUNNING = 1;
         public static final int ATTACK = 2;
+        public static final int HIT = 3;
         public static final int DEAD = 4;
 
         public static final int PIRATE_WIDTH_DEFAULT = 40;
@@ -37,8 +38,30 @@ public class Constants {
             }
             return 0;
         }
+        public static int getMaxHealth(int enemyType)
+        {
+            switch(enemyType)
+            {
+                case PIRATE:
+                    return 10;
+                default:
+                    return 1;
+            }
 
+        }
+
+        public static int getEnemyDamage(int enemyType)
+        {
+            switch(enemyType)
+            {
+                case PIRATE:
+                    return 15;
+                default:
+                    return 0;
+            }
+        }
     }
+
     public static class Directions
     {
         public static final int LEFT = 0;

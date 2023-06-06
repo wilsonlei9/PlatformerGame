@@ -95,17 +95,22 @@ public class HelperMethods {
     public static boolean IsAllTilesWalkable(int xStart, int xEnd, int y, int[][] lvlData) {
         for (int i = 0; i < xEnd - xStart; i++) {
             if (isTileSolid(xStart + i, y, lvlData))
+            {
                 return false;
+            }
             if (!isTileSolid(xStart + i, y + 1, lvlData))
+            {
                 return false;
+            }
+
         }
 
         return true;
     }
 
-    public static boolean IsSightClear(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
-        int firstXTile = (int) (firstHitbox.x / Game.TILES_SIZE);
-        int secondXTile = (int) (secondHitbox.x / Game.TILES_SIZE);
+    public static boolean noObstacles(int[][] lvlData, Rectangle2D.Float playerHitbox, Rectangle2D.Float enemyHitbox, int yTile) {
+        int firstXTile = (int) (playerHitbox.x / Game.TILES_SIZE);
+        int secondXTile = (int) (enemyHitbox.x / Game.TILES_SIZE);
 
         if (firstXTile > secondXTile)
             return IsAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);

@@ -4,11 +4,13 @@ import Main.Game;
 import entities.EnemyManager;
 import entities.Player;
 import levels.LevelManager;
+import ui.GameOver;
 import utils.LoadSave;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class Playing extends State implements Statemethods{
@@ -22,6 +24,8 @@ public class Playing extends State implements Statemethods{
     private int maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
     private int maxLvlOffsetX = maxTilesOffset * Game.TILES_SIZE;
     private BufferedImage backgroundImg;
+    private GameOver gameOverOverlay;
+    private boolean gameOver;
 
     public Playing(Game game)
     {
@@ -34,8 +38,9 @@ public class Playing extends State implements Statemethods{
     {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
-        player = new Player(200, 200, (int) (70 * Game.scale), (int) (90 * Game.scale));
+        player = new Player(200, 200, (int) (70 * Game.scale), (int) (90 * Game.scale), this);
         player.loadLvlData(levelManager.getLevel().getLvlData());
+        gameOverOverlay = new GameOver(this);
     }
 
     public void windowFocusLost()
@@ -88,14 +93,36 @@ public class Playing extends State implements Statemethods{
         levelManager.draw(g, xLvlOffset);
         player.render(g, xLvlOffset);
         enemyManager.draw(g, xLvlOffset);
+        if (gameOver)
+        {
+            gameOverOverlay.draw(g);
+        }
+    }
+
+    public void resetAll()
+    {
+
+    }
+
+    public void setGameOver(boolean gameOver)
+    {
+        this.gameOver = gameOver;
+    }
+
+    public void checkEnemyHit(Rectangle2D.Float attackBox)
+    {
+        enemyManager.checkEnemyHit(attackBox);
     }
 
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        if (e.getButton() == MouseEvent.BUTTON1)
+        if (!gameOver)
         {
-            player.setAttack(true);
+            if (e.getButton() == MouseEvent.BUTTON1)
+            {
+                player.setAttack(true);
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 package entities;
 import Main.Game;
 
+import java.awt.geom.Rectangle2D;
+
 import static utils.Constants.Directions.*;
 import static utils.Constants.EnemyConstants.*;
 import static utils.HelperMethods.*;
@@ -18,11 +20,17 @@ public abstract class Enemy extends Entity {
     protected int direction = LEFT;
     protected int tileY;
     protected float attackRange = Game.TILES_SIZE - 15;
+    protected int maxHealth;
+    protected int currentHealth;
+    protected boolean active = true;
+    protected boolean attackChecked;
 
     public Enemy(float x, float y, int width, int height, int enemyType) {
         super(x, y, width, height);
         this.enemyType = enemyType;
         initializeHitbox(x, y, width, height);
+        maxHealth = getMaxHealth(enemyType);
+        currentHealth = maxHealth;
     }
 
     protected void updateAnimationTick()
@@ -52,6 +60,14 @@ public abstract class Enemy extends Entity {
                 {
                     aniIndex = 0;
                     enemyState = IDLE;
+                }
+                else if(enemyState == HIT)
+                {
+                    enemyState = IDLE;
+                }
+                else if (enemyState == DEAD)
+                {
+                    active = false;
                 }
             }
         }
@@ -100,11 +116,12 @@ public abstract class Enemy extends Entity {
     protected boolean canSeePlayer(int[][] lvlData, Player player) {
         int playerTileY = (int) (player.getHitbox().y / Game.TILES_SIZE);
         if (playerTileY == tileY)
+        {
             if (isPlayerInRange(player)) {
-                if (IsSightClear(lvlData, hitbox, player.hitbox, tileY))
+                if (noObstacles(lvlData, hitbox, player.hitbox, tileY))
                     return true;
             }
-
+        }
         return false;
     }
 
@@ -124,6 +141,28 @@ public abstract class Enemy extends Entity {
         aniIndex = 0;
     }
 
+    public void hurt(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            newState(DEAD);
+        }
+        else {
+            newState(HIT);
+        }
+    }
+
+    protected void checkPlayerHit(Rectangle2D.Float attackBox, Player player)
+    {
+        if (attackBox.intersects(player.hitbox))
+        {
+            player.changeHealth(-getEnemyDamage(enemyType));
+        }
+        attackChecked = true;
+
+    }
+
     protected void changeWalkDir() {
         if (direction == LEFT)
             direction = RIGHT;
@@ -140,4 +179,8 @@ public abstract class Enemy extends Entity {
         return enemyState;
     }
 
+    public boolean getActive()
+    {
+        return active;
+    }
 }

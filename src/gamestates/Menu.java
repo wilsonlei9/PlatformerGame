@@ -24,6 +24,7 @@ public class Menu extends State implements Statemethods {
 
         g.setColor(Color.black);
         g.drawString("game", Game.GAME_WIDTH / 2, 200);
+        g.drawString("Press enter to play", Game.GAME_WIDTH / 2, 300);
     }
 
     @Override
