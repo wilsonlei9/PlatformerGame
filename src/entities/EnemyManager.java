@@ -143,7 +143,7 @@ public class EnemyManager {
                 if (p.getEnemyState() == RUNNING)
                 {
                     g.drawImage(pirateIdle[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset + p.flipX(), (int) p.getHitbox().y, PIRATE_WIDTH * p.flipWidth(), PIRATE_HEIGHT, null);
-                    p.drawHitbox(g, lvlOffset);
+                   // p.drawHitbox(g, lvlOffset);
                 }
 
 
@@ -152,17 +152,17 @@ public class EnemyManager {
                     if (p.aniIndex == 0)
                     {
                         g.drawImage(pirateAttack[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset + p.flipX(), (int) p.getHitbox().y, (int) (42 * Game.enemyScale) * p.flipWidth(), (int) (40 * Game.enemyScale), null);
-                        p.drawHitbox(g, lvlOffset);
+                       // p.drawHitbox(g, lvlOffset);
                     }
                     if (p.aniIndex == 1)
                     {
                         g.drawImage(pirateAttack[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset + p.flipX(), (int) p.getHitbox().y, (int) (46 * Game.enemyScale) * p.flipWidth(), (int) (40 * Game.enemyScale), null);
-                        p.drawHitbox(g, lvlOffset);
+                       // p.drawHitbox(g, lvlOffset);
                     }
                     if (p.aniIndex == 2)
                     {
                         g.drawImage(pirateAttack[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset + p.flipX(), (int) p.getHitbox().y, (int) (70 * Game.enemyScale) * p.flipWidth(), (int) (40 * Game.enemyScale), null);
-                        p.drawHitbox(g, lvlOffset);
+                       // p.drawHitbox(g, lvlOffset);
                     }
                 }
 
@@ -171,17 +171,17 @@ public class EnemyManager {
                     if (p.aniIndex == 0)
                     {
                         g.drawImage(pirateDeath[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset + p.flipX(), (int) p.getHitbox().y, (int) (39 * Game.enemyScale) * p.flipWidth(), (int) (49 * Game.enemyScale), null);
-                        p.drawHitbox(g, lvlOffset);
+                        //p.drawHitbox(g, lvlOffset);
                     }
                     if (p.aniIndex == 1)
                     {
                         g.drawImage(pirateDeath[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset + p.flipX(), (int) p.getHitbox().y, (int) (52 * Game.enemyScale) * p.flipWidth(), (int) (49 * Game.enemyScale), null);
-                        p.drawHitbox(g, lvlOffset);
+                       // p.drawHitbox(g, lvlOffset);
                     }
                     if (p.aniIndex == 2)
                     {
                         g.drawImage(pirateDeath[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset + p.flipX(), (int) p.getHitbox().y, (int) (57 * Game.enemyScale) * p.flipWidth(), (int) (49 * Game.enemyScale), null);
-                        p.drawHitbox(g, lvlOffset);
+                       // p.drawHitbox(g, lvlOffset);
                     }
                 }
             }
