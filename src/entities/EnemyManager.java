@@ -1,5 +1,6 @@
 package entities;
 
+import Main.Game;
 import gamestates.Playing;
 import utils.LoadSave;
 import static utils.Constants.EnemyConstants.*;
@@ -48,13 +49,30 @@ public class EnemyManager {
                 pirateIdle[i] = temp.getSubimage(142, 37, PIRATE_WIDTH_DEFAULT, PIRATE_HEIGHT_DEFAULT);
             }
         }
+
+        pirateAttack = new BufferedImage[3];
+        for (int i = 0; i < pirateAttack.length; i++)
+        {
+            if (i == 0)
+            {
+                pirateAttack[i] = temp.getSubimage(18, 173, 42, 40);
+            }
+            if (i == 1)
+            {
+                pirateAttack[i] = temp.getSubimage(81, 173, 46, 37);
+            }
+            if (i == 2)
+            {
+                pirateAttack[i] = temp.getSubimage(131, 173, 70, 40);
+            }
+        }
     }
 
-    public void update(int[][] lvlData)
+    public void update(int[][] lvlData, Player player)
     {
         for (Pirate p : pirate)
         {
-            p.update(lvlData);
+            p.update(lvlData, player);
         }
     }
 
@@ -70,8 +88,31 @@ public class EnemyManager {
     {
         for (Pirate p : pirate)
         {
-            g.drawImage(pirateIdle[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset, (int) p.getHitbox().y, PIRATE_WIDTH, PIRATE_HEIGHT, null);
-            p.drawHitbox(g, lvlOffset);
+            if (p.getEnemyState() == RUNNING)
+            {
+                g.drawImage(pirateIdle[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset, (int) p.getHitbox().y, PIRATE_WIDTH, PIRATE_HEIGHT, null);
+                p.drawHitbox(g, lvlOffset);
+            }
+
+            if (p.getEnemyState() == ATTACK)
+            {
+                   if (p.aniIndex == 0)
+                   {
+                       g.drawImage(pirateAttack[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset, (int) p.getHitbox().y, (int) (42 * Game.enemyScale), (int) (40 * Game.enemyScale), null);
+                       p.drawHitbox(g, lvlOffset);
+                   }
+                   if (p.aniIndex == 1)
+                   {
+                       g.drawImage(pirateAttack[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset, (int) p.getHitbox().y, (int) (46 * Game.enemyScale), (int) (40 * Game.enemyScale), null);
+                       p.drawHitbox(g, lvlOffset);
+                   }
+                   if (p.aniIndex == 2)
+                   {
+                       g.drawImage(pirateAttack[p.getAniIndex()], (int) p.getHitbox().x - lvlOffset, (int) p.getHitbox().y, (int) (70 * Game.enemyScale), (int) (40 * Game.enemyScale), null);
+                       p.drawHitbox(g, lvlOffset);
+                   }
+               }
+            }
         }
     }
-}
+
